@@ -1,1 +1,1 @@
-"```Flask run --debug```" 
+```Flask run --debug```
