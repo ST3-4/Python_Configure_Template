@@ -1,0 +1,119 @@
+{% extends "master/headerJinja.html" %}
+<br>
+
+Include template <br>
+{% include "master/includefile.html" %}
+<hr>
+
+{% block title %}Jinja Lab{% endblock %}
+<hr>
+
+{% block content %}
+{{ super() }}
+
+{# Jinja Comment #}
+<br>
+<hr>
+
+{{ "Jinja Output" }}
+<hr>
+
+Arithmetic operator
+<br>
+{{ 2 + 1 }}
+<br>
+{{ 2 * 1 }}
+<br>
+{{ 2 / 1 }}
+<br>
+{{ 2 - 1 }}
+<hr>
+
+{% set students = [
+    {'name': 'Heng', 'age': 21, 'gender': 'Male'},
+    {'name': 'Long', 'age': 21, 'gender': 'Male'},
+    {'name': 'Tek ', 'age': 23, 'gender': 'Male'},
+    {'name': 'Kak', 'age': 22, 'gender': 'Female'}
+] %}
+
+<h2>Student List</h2>
+<ul>
+    {% for student in students %}
+        <li>
+            Name: {{ student.name }}<br>
+            Age: {{ student.age }}<br>
+            Gender: {{ student.gender }}<br>
+        </li>
+    {% endfor %}
+</ul>
+<hr>
+
+Whitespace Control or strip all whitespace <br>
+my name is sok {{-"heng" }}<br>
+I am {{ 2 -}} 0 y/o
+<hr>
+
+Variable declaration
+{% set hour =12.30 %}<br>
+{{ hour }}
+<hr>
+
+Multiple Variable declaration
+{% set a, b, c = 'A', 'B', 'C' %}
+a: {{ a }}, b: {{ b }}, c: {{ c }}
+<hr>
+
+{% set message %}
+Hi!!!<br>
+this is a blog assignment
+{% endset %}
+{{ message }}
+<hr>
+
+Number Conversions round to int <br>
+{{ hour | round | int }}
+<hr>
+
+Control Statement <br>
+{% if hour > 5 and hour < 12 %}
+    Good Morning!
+{% elif hour >= 12 and hour < 17 %}
+    Good Afternoon!
+{% elif hour >= 17 %}
+    Good Evening!
+{% endif %}
+
+<hr>Ternary Conditional  <br>
+{% set time = "Good Morning!" if hour > 5 and hour < 12 else ("Good Afternoon!" if hour >= 12 and hour < 17 else "Good Evening!") %}
+{{time }}
+<hr>
+
+String Concatenation <br>
+{{ "It is" ~ hour ~ " AM/PM" }}
+<hr>
+
+format date <br>
+{{ now.strftime('%A-%b-%Y') }}
+<hr>
+
+Url for <br>
+<a href="{{ url_for("home") }}" class="button">Go to Index</a>
+<hr>
+
+Macro <br>
+{% macro input(text='',macro='') %}
+    {{ text }}<br>
+    {{ macro }}
+{% endmacro %}
+{{ input('hello world','from macro') }}
+<hr>
+{% raw %}
+{% if x > 5 %}
+    {{ x }}
+test
+{{ 'Wo ai ni' }}
+{% endif %}
+{{ input('hello world','from macro') }}
+{% endraw %}
+
+{% endblock %}
